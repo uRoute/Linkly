@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, inject, PLATFORM_ID, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, inject, input, InputSignal, PLATFORM_ID, signal, ViewChild, WritableSignal } from '@angular/core';
 import { RouterLink } from "@angular/router";
 import { GlobalService } from '../../services/global/global.service';
 import { isPlatformBrowser } from '@angular/common';
@@ -13,6 +13,7 @@ export class NavbarComponent implements AfterViewInit {
 
   private _PLATFORM_ID = inject(PLATFORM_ID)
   private _GlobalService = inject(GlobalService)
+  isUserLogged:InputSignal<boolean> = input(false)
 
   @ViewChild('dark') inputDarkElement!:ElementRef
 
@@ -32,6 +33,9 @@ export class NavbarComponent implements AfterViewInit {
     
   }
 
+  ngOnInit(){
+
+  }
 
   ngAfterViewInit(){
 

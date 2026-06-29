@@ -1,3 +1,4 @@
+import { authGuard } from './core/guard/auth.guard';
 import { Routes } from '@angular/router';
 import { AuthLayoutComponent } from './core/layouts/components/auth-layout/auth-layout.component';
 import { LoginComponent } from './features/components/login/login.component';
@@ -10,7 +11,7 @@ export const routes: Routes = [
         {path:'login',component:LoginComponent,title:'Linkly | Login'},
         {path:'register',component:RegisterComponent,title:'Linkly | Register'}
     ]},
-    {path:'' , component:MainLayoutComponent,children:[
+    {path:'' , component:MainLayoutComponent, canActivate:[authGuard] ,children:[
         {path:'home',loadComponent:()=> import('./features/components/home/home.component').then((c)=>c.HomeComponent) ,title:'Linkly | Home'},
         {path:'uer_profile',loadComponent:()=> import('./features/components/profile/profile.component').then((c)=>c.ProfileComponent) ,title:'Linkly | Profile'},
         // {path:'home',loadComponent:()=> import('./features/components/').then((c)=>c.HomeComponent) ,title:'Linkly | Home'},

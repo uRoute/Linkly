@@ -5,19 +5,10 @@
 
         <form [formGroup]="loginForm" (ngSubmit)="Login()">
 
-            <div>
-                <label for="email">Email:</label>
-                <label class="input validator">
-                    <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
-                            stroke="currentColor">
-                            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                        </g>
-                    </svg>
-                    <input type="email" placeholder="mail@site.com" required />
-                </label>
-                <div class="validator-hint hidden">Enter valid email address</div>
+
+            <div class="relative w-[75%]">
+                <label class="absolute bottom-[90%] left-[2%] my-1 font-bold text-xl text-indigo-800 dark:text-white" for="email">Email:</label>
+                <input class="input-linkly my-2" type="email" id="email" name="email" placeholder="Ex:Youssef@gmail.com">
             </div>
 
 

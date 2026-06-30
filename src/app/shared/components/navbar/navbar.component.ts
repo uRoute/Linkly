@@ -11,6 +11,7 @@ import { isPlatformBrowser } from '@angular/common';
 })
 export class NavbarComponent implements AfterViewInit {
 
+  @ViewChild('nav') navElement!:ElementRef<HTMLElement>
   private _PLATFORM_ID = inject(PLATFORM_ID)
   private _GlobalService = inject(GlobalService)
   isUserLogged:InputSignal<boolean> = input(false)
@@ -34,10 +35,17 @@ export class NavbarComponent implements AfterViewInit {
   }
 
   ngOnInit(){
+    
 
   }
 
   ngAfterViewInit(){
+    
+    let element = this.navElement.nativeElement
+    console.log(element.offsetHeight);
+    
+
+
 
     if(isPlatformBrowser(this._PLATFORM_ID)){
       let _theme = localStorage.getItem('theme')

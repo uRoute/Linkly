@@ -12,10 +12,10 @@ import { isPlatformBrowser } from '@angular/common';
 export class NavbarComponent implements AfterViewInit {
 
   @ViewChild('nav') navElement!:ElementRef<HTMLElement>
+  @ViewChild('dark') inputDarkElement!:ElementRef
   private _PLATFORM_ID = inject(PLATFORM_ID)
   private _GlobalService = inject(GlobalService)
   isUserLogged:InputSignal<boolean> = input(false)
-  @ViewChild('dark') inputDarkElement!:ElementRef
 
   check(){
     // console.log('clicked');
@@ -37,6 +37,8 @@ export class NavbarComponent implements AfterViewInit {
       let _theme = localStorage.getItem('theme')
       if(_theme === 'light'){
         this.inputDarkElement.nativeElement.checked = true
+      }else{
+        this.inputDarkElement.nativeElement.checked = false
       }
     }
 

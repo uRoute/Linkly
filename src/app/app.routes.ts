@@ -13,7 +13,7 @@ export const routes: Routes = [
     ]},
     {path:'' , component:MainLayoutComponent, canActivate:[authGuard] ,children:[
         {path:'home',loadComponent:()=> import('./features/components/home/home.component').then((c)=>c.HomeComponent) ,title:'Linkly | Home'},
-        {path:'uer_profile',loadComponent:()=> import('./features/components/profile/profile.component').then((c)=>c.ProfileComponent) ,title:'Linkly | Profile'},
+        {path:'user_profile',loadComponent:()=> import('./features/components/profile/profile.component').then((c)=>c.ProfileComponent) ,title:'Linkly | Profile'},
         // {path:'home',loadComponent:()=> import('./features/components/').then((c)=>c.HomeComponent) ,title:'Linkly | Home'},
         // {path:'home',loadComponent:()=> import('./features/components/home/home.component').then((c)=>c.HomeComponent) ,title:'Linkly | Home'},
 

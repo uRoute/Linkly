@@ -15,7 +15,6 @@ export class NavbarComponent implements AfterViewInit {
   private _PLATFORM_ID = inject(PLATFORM_ID)
   private _GlobalService = inject(GlobalService)
   isUserLogged:InputSignal<boolean> = input(false)
-
   @ViewChild('dark') inputDarkElement!:ElementRef
 
   check(){
@@ -25,28 +24,15 @@ export class NavbarComponent implements AfterViewInit {
     if(this.inputDarkElement.nativeElement.checked){
       this._GlobalService.isDarkMode.set(true)
       this._GlobalService.toggleTheme()
-      console.log(this._GlobalService.isDarkMode());
+      // console.log(this._GlobalService.isDarkMode());
     }else{
       this._GlobalService.isDarkMode.set(false);
       this._GlobalService.toggleTheme()
-      console.log(this._GlobalService.isDarkMode());
+      // console.log(this._GlobalService.isDarkMode());
     }
     
   }
-
-  ngOnInit(){
-    
-
-  }
-
   ngAfterViewInit(){
-    
-    let element = this.navElement.nativeElement
-    console.log(element.offsetHeight);
-    
-
-
-
     if(isPlatformBrowser(this._PLATFORM_ID)){
       let _theme = localStorage.getItem('theme')
       if(_theme === 'light'){

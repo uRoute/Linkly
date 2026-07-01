@@ -1,4 +1,4 @@
-<div #nav class="navbar inset-shadow-sm inset-shadow-indigo-800 bg-[rgba(105,105,105,0.246)] dark:bg-[rgba(227,226,226,0.246)] w-[98%] mt-[1%] mx-auto justify-between py-3 px-6 rounded-full text-black dark:text-white">
+<div #nav class="navbar inset-shadow-xs inset-shadow-indigo-800 bg-[rgba(100,100,100,0.246)] dark:bg-[rgba(227,226,226,0.246)] w-[98%] mt-[1%] mx-auto justify-between py-3 px-6 rounded-full text-black dark:text-white">
     <div class="">
         <a routerLink="/" class="font-bold text-xl">Linkly</a>
     </div>
@@ -8,8 +8,8 @@
                 <li class="font-bold text-lg"><a routerLink="/login">Log in</a></li>
                 <li class="font-bold text-lg"><a routerLink="/register">Signup</a></li>
             }@if(isUserLogged()) {
-                <li class="font-bold text-lg"><a routerLink="/home">Home</a></li>
-                <li class="font-bold text-lg"><a routerLink="/user_profile">Profile <img src="" alt=""> </a></li> 
+                <li class="font-bold text-lg"><a routerLink="/home"><i class="fa-solid text-indigo-800 fa-house-user dark:text-white"></i></a></li>
+                <li class="font-bold text-lg"><a routerLink="/user_profile"><i class="fa-solid fa-bell fa-rotate-by text-indigo-800 dark:text-white"></i> <img src="" alt=""> </a></li> 
             }
 
                        
@@ -29,8 +29,8 @@
                 <li class="font-bold text-lg"><a routerLink="/login">Log in</a></li>
                 <li class="font-bold text-lg"><a routerLink="/register">Signup</a></li>
             }@if(isUserLogged()) {
-                <li class="font-bold text-lg"><a routerLink="/home">Home</a></li>
-                <li class="font-bold text-lg"><a routerLink="/user_profile">Profile <img src="" alt=""> </a></li> 
+                <li class="font-bold text-lg"><a routerLink="/home">Home<i class="text-indigo-800 fa-solid fa-house-user"></i></a></li>
+                <li class="font-bold text-lg"><a routerLink="/user_profile">Profile <i class=" text-indigo-800 fa-solid fa-bell fa-rotate-by"></i> <img src="" alt=""> </a></li> 
             }
         </ul>
     </div>

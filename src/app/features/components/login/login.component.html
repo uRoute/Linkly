@@ -3,13 +3,26 @@
 
     <div class="form flex justify-center p-2">
 
+
+
+
         <form class="w-[75%]" [formGroup]="loginForm" (ngSubmit)="Login()">
 
-
+            @if(resMessage){
+            <div role="alert" class="alert alert-error">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span> {{resMessage}} </span>
+            </div>
+            }
             <div class=" my-3">
                 @let userEmail = loginForm.get('email');
 
-                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="email"><span class="text-rose-500">*</span>Email:</label>
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="email"><span
+                        class="text-rose-500">*</span>Email:</label>
                 <input [class]="{
                     'input-valid' : userEmail?.errors && userEmail?.touched,
                     'input-invalid' : !userEmail?.errors && userEmail?.touched
@@ -33,7 +46,8 @@
             <div class=" my-3">
                 @let userPassword = loginForm.get('password');
 
-                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="password"><span class="text-rose-500">*</span>Password:</label>
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="password"><span
+                        class="text-rose-500">*</span>Password:</label>
                 <input [class]="{
                     'input-valid' : userPassword?.errors && userPassword?.touched,
                     'input-invalid' : !userPassword?.errors && userPassword?.touched
@@ -55,13 +69,14 @@
 
             </div>
 
-           <div>
+            <div>
                 <button [disabled]="loginForm.invalid"
                     class="disabled:bg-gray-500 disabled:cursor-not-allowed w-full block rounded-md bg-indigo-800 text-white py-2 px-4 rounded hover:bg-indigo-700 transition-all duration-300 cursor-pointer  my-2"
                     type="submit">@if(!isSpinner){ <span>Login</span> } @if(isSpinner){<i
                         class="fa-solid fa-circle-notch fa-spin"></i>}</button>
                 <p class="text-center">Don't have an account? <a routerLink="/register"
-                        class="text-indigo-800 dark:text-white hover:underline">Register here <i class="fa-solid fa-user-plus"></i></a></p>
+                        class="text-indigo-800 dark:text-white hover:underline">Register here <i
+                            class="fa-solid fa-user-plus"></i></a></p>
             </div>
 
 

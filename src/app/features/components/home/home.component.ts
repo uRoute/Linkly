@@ -1,4 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { PostsService } from '../../../shared/services/posts/posts.service';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { IPost } from '../../../core/interfaces/post/ipost';
 
 @Component({
   selector: 'app-home',
@@ -7,5 +11,20 @@ import { Component } from '@angular/core';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+
+  private _PostsService = inject(PostsService)
+  private _Router = inject(Router)
+  private _ToastrService = inject(ToastrService)
+  posts!:IPost[]
+
+  ngOnInit(){
+    this._PostsService.GetAllPosts().subscribe({
+      next:(res:any)=>{
+        console.log(res);
+        
+        // this.posts = res.data
+      }
+    })
+  }
 
 }

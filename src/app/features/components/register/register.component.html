@@ -1,47 +1,193 @@
-<div class="grid grid-cols-2 justify-between content-between">
-
-
-    <div class="logo border-2 border-lime-800 dark:border-white  rounded-lg p-2">
+<div class="grid grid-cols-1 xl:grid-cols-2 p-2 content-center justify-center">
+    <div class="logo  border-2 border-lime-800 self-center dark:border-white  rounded-lg p-2">
         <img src="./image_8300ec2a.png" class="bg-center bg-cover" alt="">
     </div>
-
-
-
-
     <div class="form flex justify-center p-2">
-
         <form class="w-[75%]" [formGroup]="registerForm" (ngSubmit)="Register()">
+            @if(resMessage){
+                <div role="alert" class="alert alert-error flex">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <p>{{ resMessage }}</p>
+            </div>
+        }
+            <div class=" my-3">
+                @let name = registerForm.get('name');
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="name"><span class="text-rose-500">*</span>Name:</label>
+                <input [class]="{
+                    'input-valid' : name?.errors && name?.touched,
+                    'input-invalid' : !name?.errors && name?.touched
+                }" formControlName="name" class="input-linkly my-2" type="text" id="name" name="name"
+                    placeholder="Ex:Youssef Samir">
+                @if(name?.errors && name?.touched){
+                <div role="alert" class="alert alert-error flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    @if(name?.getError('required')){<p>-Name is required.</p>}
+                    @if(name?.getError('minlength')){<p>-Name must be at least 3 characters long.</p>}
+                    @if(name?.getError('maxlength')){<p>-Name must be at most 20 characters long.</p>}
+                    @if(name?.getError('pattern')){<p>-Each name of Your fullName must start with a capital letter and
+                        contain only letters and spaces.</p>}
+                </div>
+                }
+            </div>
+            <div class=" my-3">
+                @let userName = registerForm.get('username');
 
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="username"><span class="text-rose-500">*</span>User name:</label>
+                <input [class]="{
+                    'input-valid' : userName?.errors && userName?.touched,
+                    'input-invalid' : !userName?.errors && userName?.touched
+                }" formControlName="username" class="input-linkly my-2" type="text" id="username" name="username"
+                    placeholder="Ex:Youssef_samir">
+
+                @if(userName?.errors && userName?.touched){
+                <div role="alert" class="alert alert-error flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    @if(userName?.getError('required')){<p>-User name is required.</p>}
+                    @if(userName?.getError('minlength')){<p>-User name must be at least 3 characters long.</p>}
+                    @if(userName?.getError('maxlength')){<p>-User name must be at most 15 characters long.</p>}
+                    @if(userName?.getError('pattern')){<p>-User name must contain only lower letters, numbers,
+                        and {{ spChars }} .</p>}
+                </div>
+                }
+
+            </div>
 
             <div class=" my-3">
-                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="name">Name:</label>
-                <input class="input-linkly my-2" type="text" id="name" name="name" placeholder="Ex:Youssef Samir">
-            </div>
-            <div class=" my-3">
-                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="username">User name:</label>
-                <input class="input-linkly my-2" type="text" id="username" name="username" placeholder="Ex:Youssef_samir">
-            </div>
-            <div class=" my-3">
-                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="email">Email:</label>
-                <input class="input-linkly my-2" type="email" id="email" name="email" placeholder="Ex:Youssef@gmail.com">
+                @let userEmail = registerForm.get('email');
+
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="email"><span class="text-rose-500">*</span>Email:</label>
+                <input [class]="{
+                    'input-valid' : userEmail?.errors && userEmail?.touched,
+                    'input-invalid' : !userEmail?.errors && userEmail?.touched
+                }" formControlName="email" class="input-linkly my-2" type="email" id="email" name="email"
+                    placeholder="Ex:Youssef@gmail.com">
+
+                @if(userEmail?.errors && userEmail?.touched){
+                <div role="alert" class="alert alert-error flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    @if(userEmail?.getError('required')){<p>-Email is required.</p>}
+                    @if(userEmail?.getError('email')){<p>-Please enter a valid email address.</p>}
+                </div>
+                }
+
             </div>
 
             <div class=" my-3">
-                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="date">Date of birth:</label>
-                <input class="input-linkly my-2" type="date" id="date" name="date" placeholder="Ex:31-1-1999">
+
+                @let userDate = registerForm.get('dateOfBirth');
+
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="date"><span class="text-rose-500">*</span>Date of birth:</label>
+                <input [class]="{
+                    'input-valid' : userDate?.errors && userDate?.touched,
+                    'input-invalid' : !userDate?.errors && userDate?.touched
+                }" formControlName="dateOfBirth" class="input-linkly my-2" type="date" id="date" name="date"
+                    placeholder="Ex:31-1-1999">
+                @if(userDate?.errors && userDate?.touched){
+                <div role="alert" class="alert alert-error flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    @if(userDate?.getError('required')){<p>-Date of birth is required.</p>}
+                </div>
+                }
+
+            </div>
+
+            <div class=" my-3">
+                @let userPassword = registerForm.get('password');
+
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="password"><span class="text-rose-500">*</span>Password:</label>
+                <input [class]="{
+                    'input-valid' : userPassword?.errors && userPassword?.touched,
+                    'input-invalid' : !userPassword?.errors && userPassword?.touched
+                }" formControlName="password" class="input-linkly my-2" type="password" id="password" name="password"
+                    placeholder="Ex:Pass@123">
+                @if(userPassword?.errors && userPassword?.touched){
+                <div role="alert" class="alert alert-error flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    @if(userPassword?.getError('required')){<p>-Password is required.</p>}
+                    @if(userPassword?.getError('minlength')){<p>-Password must be at least 8 characters long.</p>}
+                    @if(userPassword?.getError('pattern')){<p>-Password must contain UPPERCASE, lowercase and numbers
+                    </p>}
+                </div>
+                }
+
+            </div>
+
+            <div class=" my-3">
+                @let userRePassword = registerForm.get('rePassword');
+
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="repassword"><span class="text-rose-500">*</span>RePassword:</label>
+                <input [class]="{
+                    'input-valid' : (registerForm.errors || userRePassword?.errors) && userRePassword?.touched,
+                    'input-invalid' : !(registerForm.errors || userRePassword?.errors) && userRePassword?.touched
+                }" formControlName="rePassword" class="input-linkly my-2" type="password" id="repassword"
+                    name="repassword" placeholder="Ex:Pass@123">
+
+                @if((registerForm.errors || userRePassword?.errors) && userRePassword?.touched){
+                <div role="alert" class="alert alert-error flex">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    @if(userRePassword?.getError('required')){<p>-RePassword is required.</p>}
+                    @if(registerForm.getError('missMatch')){<p>-Not match.</p>}
+                    @if(userRePassword?.getError('pattern')){<p>-RePassword must contain UPPERCASE, lowercase and
+                        numbers</p>}
+                </div>
+                }
             </div>
             <div class=" my-3">
-                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="password">Password:</label>
-                <input class="input-linkly my-2" type="password" id="password" name="password" placeholder="Ex:Pass@123">
+                @let userGender = registerForm.get('gender');
+                <p class="font-bold text-xl text-indigo-800 dark:text-white"> <span class="text-rose-500">*</span> Gender :</p>
+                <div class="flex justify-evenly items-center">
+                    <div class="flex  items-center">
+                        <label class="font-bold text-black dark:text-white mr-1" for="male">Male:</label>
+                        <input formControlName="gender" class="radio radio-primary" type="radio" id="male" name="gender"
+                            value="male">
+                    </div>
+                    <div class="flex  items-center">
+                        <label class="font-bold text-black dark:text-white  mr-1" for="female">Female:</label>
+                        <input formControlName="gender" class="radio radio-secondary" type="radio" id="female"
+                            name="gender" value="female">
+                    </div>
+
+                </div>
+
             </div>
+
 
             <div>
                 <button [disabled]="registerForm.invalid"
-                    class="w-full block rounded-md bg-indigo-800 text-white py-2 px-4 rounded hover:bg-indigo-700 transition-all duration-300 cursor-pointer  my-2"
-                    type="submit">@if(!isSpinner){Register} @if(isSpinner){<i
+                    class="disabled:bg-gray-500 disabled:cursor-not-allowed w-full block rounded-md bg-indigo-800 text-white py-2 px-4 rounded hover:bg-indigo-700 transition-all duration-300 cursor-pointer  my-2"
+                    type="submit">@if(!isSpinner){ <span>Register</span> } @if(isSpinner){<i
                         class="fa-solid fa-circle-notch fa-spin"></i>}</button>
                 <p class="text-center">Already have an account? <a routerLink="/login"
-                        class="text-indigo-800 dark:text-white hover:underline">Login here <i class="fa-solid fa-door-open"></i></a></p>
+                        class="text-indigo-800 dark:text-white hover:underline">Login here <i
+                            class="fa-solid fa-door-open"></i></a></p>
             </div>
 
 

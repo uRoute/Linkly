@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, PLATFORM_ID } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms'
 import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../../shared/services/authentication/authentication.service';
 import { ToastrService } from 'ngx-toastr';
+import { isPlatformBrowser } from '@angular/common';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule , RouterLink],
@@ -12,9 +13,11 @@ import { ToastrService } from 'ngx-toastr';
 export class LoginComponent {
 
   private _Router = inject(Router)
+  private _PLATFORM_ID = inject(PLATFORM_ID)
   private _AuthenticationService = inject(AuthenticationService)
   private _ToastrService = inject(ToastrService)
   isSpinner:boolean = false
+  resMessage:string = '';
 
   loginForm:FormGroup = new FormGroup({
     email: new FormControl(null , [Validators.required,Validators.email]),
@@ -28,6 +31,16 @@ export class LoginComponent {
         next:(res)=>{
           console.log(res);
           this._ToastrService.info('Hello')
+          this.isSpinner=false;
+          this._Router.navigate(['/home'])
+          if(isPlatformBrowser(this._PLATFORM_ID)){
+            localStorage.setItem('userToken',res.data.token);
+          }
+        },
+        error:(err)=>{
+          this.isSpinner=false;
+          this.resMessage=err.error.message;
+          this._ToastrService.error(this.resMessage)
         }
       })
     }

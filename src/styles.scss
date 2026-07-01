@@ -20,6 +20,7 @@
   text-align: center;
   font-weight: 700;
   color: #000;
+  z-index: 99999999;
 }
 .my-toast-fail {
   background-color: #f71e1e;
@@ -28,6 +29,8 @@
   text-align: center;
   font-weight: 700;
   color: #fff;
+  z-index: 99999999;
+
 }
 .my-toast-position {
   position: fixed;
@@ -36,8 +39,8 @@
   transform: translateX(-50%);
 }
 .input-valid {
-  @apply border-rose-500 border-4;
+  @apply border-rose-500 border-[0.2rem] dark:border-rose-500;
 }
 .input-invalid {
-  @apply border-emerald-500;
+  @apply border-emerald-500 border-[0.2rem] dark:border-emerald-500;
 }

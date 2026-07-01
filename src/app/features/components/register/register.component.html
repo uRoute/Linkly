@@ -1,1 +1,54 @@
-<p>register works!</p>
+<div class="grid grid-cols-2 justify-between content-between">
+
+
+    <div class="logo border-2 border-lime-800 dark:border-white  rounded-lg p-2">
+        <img src="./image_8300ec2a.png" class="bg-center bg-cover" alt="">
+    </div>
+
+
+
+
+    <div class="form flex justify-center p-2">
+
+        <form class="w-[75%]" [formGroup]="registerForm" (ngSubmit)="Register()">
+
+
+            <div class=" my-3">
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="name">Name:</label>
+                <input class="input-linkly my-2" type="text" id="name" name="name" placeholder="Ex:Youssef Samir">
+            </div>
+            <div class=" my-3">
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="username">User name:</label>
+                <input class="input-linkly my-2" type="text" id="username" name="username" placeholder="Ex:Youssef_samir">
+            </div>
+            <div class=" my-3">
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="email">Email:</label>
+                <input class="input-linkly my-2" type="email" id="email" name="email" placeholder="Ex:Youssef@gmail.com">
+            </div>
+
+            <div class=" my-3">
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="date">Date of birth:</label>
+                <input class="input-linkly my-2" type="date" id="date" name="date" placeholder="Ex:31-1-1999">
+            </div>
+            <div class=" my-3">
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="password">Password:</label>
+                <input class="input-linkly my-2" type="password" id="password" name="password" placeholder="Ex:Pass@123">
+            </div>
+
+            <div>
+                <button [disabled]="registerForm.invalid"
+                    class="w-full block rounded-md bg-indigo-800 text-white py-2 px-4 rounded hover:bg-indigo-700 transition-all duration-300 cursor-pointer  my-2"
+                    type="submit">@if(!isSpinner){Register} @if(isSpinner){<i
+                        class="fa-solid fa-circle-notch fa-spin"></i>}</button>
+                <p class="text-center">Already have an account? <a routerLink="/login"
+                        class="text-indigo-800 dark:text-white hover:underline">Login here <i class="fa-solid fa-door-open"></i></a></p>
+            </div>
+
+
+        </form>
+
+    </div>
+
+
+
+</div>

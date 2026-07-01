@@ -1,14 +1,23 @@
-<div class="grid grid-cols-2 pt-3">
+<div class="grid grid-cols-2 justify-between content-between">
 
 
-    <div class="form ">
+    <div class="form flex justify-center p-2">
 
-        <form [formGroup]="loginForm" (ngSubmit)="Login()">
+        <form class="w-[75%]" [formGroup]="loginForm" (ngSubmit)="Login()">
 
 
-            <div class="relative w-[75%]">
-                <label class="absolute bottom-[90%] left-[2%] my-1 font-bold text-xl text-indigo-800 dark:text-white" for="email">Email:</label>
+            <div class=" my-3">
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="email">Email:</label>
                 <input class="input-linkly my-2" type="email" id="email" name="email" placeholder="Ex:Youssef@gmail.com">
+            </div>
+            <div class=" my-3">
+                <label class="font-bold text-xl text-indigo-800 dark:text-white" for="password">Password:</label>
+                <input class="input-linkly my-2" type="password" id="password" name="password" placeholder="Ex:Pass@123">
+            </div>
+
+            <div>
+                <button class="w-full block rounded-md bg-indigo-800 text-white py-2 px-4 rounded hover:bg-indigo-700 transition-all duration-300 cursor-pointer  my-2" type="submit">@if(!isSpinner){Login} @if(isSpinner){<i class="fa-solid fa-circle-notch fa-spin"></i>}</button>
+                <p class="text-center">Doesn't have an account? <a routerLink="/register" class="text-indigo-800 dark:text-white hover:underline">Register here <i class="fa-regular fa-hand"></i></a></p>
             </div>
 
 
@@ -17,7 +26,7 @@
     </div>
 
 
-    <div class="logo border-2 border-lime-800  rounded-lg p-2">
+    <div class="logo border-2 border-lime-800 dark:border-white  rounded-lg p-2">
         <img src="./image_8300ec2a.png" class="w-full" alt="">
     </div>
 

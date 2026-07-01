@@ -1,7 +1,11 @@
-.navbar{
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 99999999;
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 99999999;
+  background-color: rgba(105, 105, 105, 0.246);
+  filter: blur(10px);
+  backdrop-filter: blur(10px);
+  -webkit-filter: blur(0.1px);
 }

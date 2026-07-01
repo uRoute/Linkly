@@ -1,28 +1,47 @@
-<div #nav class="navbar bg-base-100 shadow-lg px-10">
-    <div class="navbar-start">
-        <a class="btn btn-ghost text-xl">Linkly</a>
+<div #nav class="navbar w-[98%] mt-[1%] mx-auto justify-between p-3 rounded-full bg-white text-black dark:text-white">
+    <div class="">
+        <a routerLink="/" class="font-bold text-xl">Linkly</a>
     </div>
-    <div class="navbar-center hidden lg:flex">
-        <ul class="menu menu-horizontal px-1">
+    <div class=" xl:flex hidden">
+        <ul class="menu   menu-horizontal px-1">
             @if(!isUserLogged()){
-                <li><a routerLink="/login">Log in</a></li>
-                <li><a routerLink="/register">Signup</a></li>
+                <li class="font-bold text-lg"><a routerLink="/login">Log in</a></li>
+                <li class="font-bold text-lg"><a routerLink="/register">Signup</a></li>
             }@if(isUserLogged()) {
-                <li><a routerLink="/home">Home</a></li>
-                <li><a routerLink="/uer_profile">Profile <img src="" alt=""> </a></li> 
+                <li class="font-bold text-lg"><a routerLink="/home">Home</a></li>
+                <li class="font-bold text-lg"><a routerLink="/user_profile">Profile <img src="" alt=""> </a></li> 
             }
 
                        
         </ul>
     </div>
-    <div class="navbar-end">
+    <div class="dropdown dropdown-end xl:hidden">
+        <label tabindex="0" class="btn btn-ghost btn-circle">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h7" />
+            </svg>
+        </label>
+        <ul tabindex="0"
+            class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-white">
+            @if(!isUserLogged()){
+                <li class="font-bold text-lg"><a routerLink="/login">Log in</a></li>
+                <li class="font-bold text-lg"><a routerLink="/register">Signup</a></li>
+            }@if(isUserLogged()) {
+                <li class="font-bold text-lg"><a routerLink="/home">Home</a></li>
+                <li class="font-bold text-lg"><a routerLink="/user_profile">Profile <img src="" alt=""> </a></li> 
+            }
+        </ul>
+    </div>
+    <div class="">
         <label class="flex justify-center items-center cursor-pointer gap-2">
 
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
-            <input (click)="check()" #dark type="checkbox" value="synthwave" class="toggle theme-controller" />
+            <input placeholder="darkmode toggle" (click)="check()" #dark type="checkbox" value="synthwave" class="toggle theme-controller" />
 
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

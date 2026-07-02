@@ -21,7 +21,7 @@ export class HomeComponent {
   private _Router = inject(Router)
   private _ToastrService = inject(ToastrService)
   private _CookieService = inject(CookieService)
-  posts!:IPost[]
+  posts:IPost[] = []
   userInfo:Signal<ILogedUser>  = computed(() => this._AuthenticationService.userInfo() );
   ngOnInit(){
     this._PostsService.GetAllPosts().subscribe({
@@ -40,8 +40,7 @@ export class HomeComponent {
       
     }    
   }
-
-
+  
   LikePost(postID:string){
     this._PostsService.LikesOnPost(postID).subscribe({
       next:(res)=>{

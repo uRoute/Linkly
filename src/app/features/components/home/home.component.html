@@ -1,11 +1,11 @@
-<div class="w-[85%] xl:w-[55%]  p-2  mx-auto">
+<div class="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[50%]  p-1  mx-auto">
 
 
     @if(posts.length>0){
 
     @for(post of posts ; track post.id){
 
-    <div class="bg-white my-3 border-2 border-gray-200 shadow-md shadow-gray-400 dark:white p-2 rounded-md">
+    <div class="post text-black bg-white my-3 border-2 border-gray-200 shadow-md shadow-gray-400 dark:white p-2 rounded-md">
 
         <div class="post-head flex justify-between items-center">
 
@@ -16,10 +16,10 @@
                     <img class="w-full h-full rounded-full" [src]="post.user.photo" alt="user photo">
                 </div>
                 <div class="">
-                    <h2 class="text-md font-bold text-gray-400 my-1"> {{ post.user.name }} </h2>
+                    <h2 class="text-md font-bold text-gray-600 my-1"> {{ post.user.name }} </h2>
                     <p class="text-sm font-bold text-gray-400"> {{post.createdAt | date : 'short'}} </p>
                 </div>
-                <div class="self-end text-black">
+                <div class="flex items-center justify-center text-black">
                     <span><i class="fa-solid fa-bullhorn"></i></span>
                 </div>
             </div>
@@ -27,9 +27,9 @@
             <div>
 
                 @if (post.bookmarked) {
-                <span class="text-gray-200"><i class="fa-solid fa-bookmark"></i></span>
+                <span class="text-gray-400"><i class="fa-solid fa-bookmark"></i></span>
                 } @else {
-                <span class="text-gray-200"><i class="fa-regular fa-bookmark"></i></span>
+                <span class="text-gray-400"><i class="fa-regular fa-bookmark"></i></span>
                 }
 
             </div>
@@ -45,11 +45,11 @@
             }
         </div>
 
-        <div class="w-2/3 mx-auto flex justify-between items-center">
+        <div class="w-2/3 text-black mx-auto flex justify-between items-center">
 
             <div class="likes">
                 <span><i class="fa-regular fa-thumbs-up"></i></span>
-                <!-- @if(post.likes.length > 0){<span> {{post.likesCount}} </span>} -->
+                @if(post.likes.length > 0){<span> {{post.likesCount}} </span>}
             </div>
             <div class="comments">
                 <span><i class="fa-regular fa-comment"></i></span>

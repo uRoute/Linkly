@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthenticationService } from '../../../shared/services/authentication/authentication.service';
 import { ToastrService } from 'ngx-toastr';
 import { isPlatformBrowser } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-login',
   imports: [ReactiveFormsModule , RouterLink],
@@ -14,6 +15,7 @@ export class LoginComponent {
 
   private _Router = inject(Router)
   private _PLATFORM_ID = inject(PLATFORM_ID)
+  private _CookieService = inject(CookieService);
   private _AuthenticationService = inject(AuthenticationService)
   private _ToastrService = inject(ToastrService)
   isSpinner:boolean = false
@@ -34,15 +36,20 @@ export class LoginComponent {
           this.isSpinner=false;
           this._Router.navigate(['/home'])
           if(isPlatformBrowser(this._PLATFORM_ID)){
-            localStorage.setItem('userToken',res.data.token);
+            this._CookieService.set('userToken', res.data.token);
           }
         },
         error:(err)=>{
+          console.log(err);
+          
           this.isSpinner=false;
           this.resMessage=err.error.message;
           this._ToastrService.error(this.resMessage)
         }
       })
+    }else{
+      console.log(this.loginForm);
+      
     }
   }
 

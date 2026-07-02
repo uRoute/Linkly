@@ -2,6 +2,7 @@ import { AfterViewInit, Component, ElementRef, inject, input, InputSignal, PLATF
 import { Router, RouterLink } from "@angular/router";
 import { GlobalService } from '../../services/global/global.service';
 import { isPlatformBrowser } from '@angular/common';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,6 +16,7 @@ export class NavbarComponent implements AfterViewInit {
   @ViewChild('dark') inputDarkElement!:ElementRef
   private _PLATFORM_ID = inject(PLATFORM_ID)
   private _Router = inject(Router)
+  private _CookieService = inject(CookieService);
   private _GlobalService = inject(GlobalService)
   isUserLogged:InputSignal<boolean> = input(false)
 
@@ -46,7 +48,7 @@ export class NavbarComponent implements AfterViewInit {
   }
   LogOut(){
     if(isPlatformBrowser(this._PLATFORM_ID)){
-      localStorage.removeItem('userToken');
+      this._CookieService.delete('userToken');
       this._Router.navigate(['/login']);
     }
   }

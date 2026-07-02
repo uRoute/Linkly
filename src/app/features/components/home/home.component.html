@@ -1,7 +1,7 @@
 <div class="w-[85%] xl:w-[55%]  p-2  mx-auto">
 
 
-    @if(posts.length){
+    @if(posts.length>0){
 
     @for(post of posts ; track post.id){
 
@@ -49,7 +49,7 @@
 
             <div class="likes">
                 <span><i class="fa-regular fa-thumbs-up"></i></span>
-                @if(post.likes.length > 0){<span> {{post.likesCount}} </span>}
+                <!-- @if(post.likes.length > 0){<span> {{post.likesCount}} </span>} -->
             </div>
             <div class="comments">
                 <span><i class="fa-regular fa-comment"></i></span>

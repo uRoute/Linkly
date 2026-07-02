@@ -1,6 +1,73 @@
-<div class="w-[85%] xl:w-[100%]  p-2  mx-auto">
+<div class="w-[85%] xl:w-[55%]  p-2  mx-auto">
 
 
+    @if(posts.length){
+
+    @for(post of posts ; track post.id){
+
+    <div class="bg-white my-3 border-2 border-gray-200 shadow-md shadow-gray-400 dark:white p-2 rounded-md">
+
+        <div class="post-head flex justify-between items-center">
+
+            <div class="flex justify-between items-center gap-x-1">
+
+                <div
+                    class="user_photo w-[25px] h-[25px] xl:w-[60px] xl:h-[60px] rounded-full border-2 border-gray-300 p-1">
+                    <img class="w-full h-full rounded-full" [src]="post.user.photo" alt="user photo">
+                </div>
+                <div class="">
+                    <h2 class="text-md font-bold text-gray-400 my-1"> {{ post.user.name }} </h2>
+                    <p class="text-sm font-bold text-gray-400"> {{post.createdAt | date : 'short'}} </p>
+                </div>
+                <div class="self-end text-black">
+                    <span><i class="fa-solid fa-bullhorn"></i></span>
+                </div>
+            </div>
+
+            <div>
+
+                @if (post.bookmarked) {
+                <span class="text-gray-200"><i class="fa-solid fa-bookmark"></i></span>
+                } @else {
+                <span class="text-gray-200"><i class="fa-regular fa-bookmark"></i></span>
+                }
+
+            </div>
+
+        </div>
+
+        <div class="post-body p-2">
+            <h2 class="font-semibold text-black  text-md mb-1"> {{post.body }}</h2>
+            @if(post.image){
+            <div class="border-2 border-gray-100 rounded-md">
+                <img class="w-full rounded-md" [src]="post.image" alt="post image">
+            </div>
+            }
+        </div>
+
+        <div class="w-2/3 mx-auto flex justify-between items-center">
+
+            <div class="likes">
+                <span><i class="fa-regular fa-thumbs-up"></i></span>
+                @if(post.likes.length > 0){<span> {{post.likesCount}} </span>}
+            </div>
+            <div class="comments">
+                <span><i class="fa-regular fa-comment"></i></span>
+            </div>
+            <div class="shares">
+                <span><i class="fa-regular fa-share-from-square"></i></span>
+                @if(post.sharesCount>0){<span> {{post.sharesCount}} </span>}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    }
+
+    }@else {
     <div class="w-[230px] my-3 xl:w-[600px] p-2 bg-white rounded-md">
         <div class="flex my-3 w-full  flex-col gap-4">
             <div class="skeleton bg-indigo-900 dark:bg-gray-200 h-32 w-full"></div>
@@ -25,6 +92,7 @@
             <div class="skeleton bg-indigo-900 dark:bg-gray-200 h-4 w-full"></div>
         </div>
     </div>
+    }
 
 
 

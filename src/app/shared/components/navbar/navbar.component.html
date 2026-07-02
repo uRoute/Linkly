@@ -10,6 +10,7 @@
             }@if(isUserLogged()) {
                 <li class="font-bold text-lg"><a routerLink="/home"><i class="fa-solid text-indigo-800 fa-house-user dark:text-white"></i></a></li>
                 <li class="font-bold text-lg"><a routerLink="/user_profile"><i class="fa-solid fa-bell fa-rotate-by text-indigo-800 dark:text-white"></i> <img src="" alt=""> </a></li> 
+                <li class="font-bold text-lg"><a (click)="LogOut()" class="cursor-pointer"> <i class="fa-solid fa-arrow-right-from-bracket text-indigo-800 dark:text-white"></i> </a></li> 
             }
 
                        

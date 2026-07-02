@@ -3,10 +3,11 @@ import { PostsService } from '../../../shared/services/posts/posts.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IPost } from '../../../core/interfaces/post/ipost';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -19,10 +20,9 @@ export class HomeComponent {
 
   ngOnInit(){
     this._PostsService.GetAllPosts().subscribe({
-      next:(res:any)=>{
+      next:(res)=>{
+        this.posts = res.data.posts;
         console.log(res);
-        
-        // this.posts = res.data
       }
     })
   }

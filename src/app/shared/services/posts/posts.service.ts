@@ -13,6 +13,11 @@ export class PostsService {
   GetAllPosts():Observable<any>{
     return this._HttpClient.get(`${environment.baseURL}/posts`)
   }
-  
+  LikesOnPost(postID:string):Observable<any>{
+    return this._HttpClient.put(`${environment.baseURL}/posts/${postID}/like`,'')
+  }
+  BookmarkPosts(postID:string):Observable<any>{
+    return this._HttpClient.put(`${environment.baseURL}/posts/${postID}/bookmark`,'')
+  }
 
 }

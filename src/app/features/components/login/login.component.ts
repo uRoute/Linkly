@@ -37,6 +37,7 @@ export class LoginComponent {
           this._Router.navigate(['/home'])
           if(isPlatformBrowser(this._PLATFORM_ID)){
             this._CookieService.set('userToken', res.data.token);
+            this._AuthenticationService.decodeToken(res.data.token)
           }
         },
         error:(err)=>{

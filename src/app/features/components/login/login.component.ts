@@ -32,7 +32,7 @@ export class LoginComponent {
       this._AuthenticationService.SignIn(this.loginForm.value).subscribe({
         next:(res)=>{
           console.log(res);
-          this._ToastrService.info('Hello')
+          this._ToastrService.info('Hello',res.data.user.name)
           this.isSpinner=false;
           this._Router.navigate(['/home'])
           if(isPlatformBrowser(this._PLATFORM_ID)){

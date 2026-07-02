@@ -16,8 +16,12 @@ export class PostsService {
   LikesOnPost(postID:string):Observable<any>{
     return this._HttpClient.put(`${environment.baseURL}/posts/${postID}/like`,'')
   }
+  GetPostLikes(postID:string):Observable<any>{
+    return this._HttpClient.get(`${environment.baseURL}/posts/${postID}/likes?page=1&limit=20`)
+  }
   BookmarkPosts(postID:string):Observable<any>{
     return this._HttpClient.put(`${environment.baseURL}/posts/${postID}/bookmark`,'')
   }
+
 
 }

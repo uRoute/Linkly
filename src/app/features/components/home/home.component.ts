@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common';
 import { AuthenticationService } from '../../../shared/services/authentication/authentication.service';
 import { ILogedUser } from '../../../core/interfaces/loggedUser/iloged-user';
 import { CookieService } from 'ngx-cookie-service';
+import { ILike } from '../../../core/interfaces/likes/ilike';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,7 @@ export class HomeComponent {
   private _ToastrService = inject(ToastrService)
   private _CookieService = inject(CookieService)
   posts:IPost[] = []
+  postLikes!:ILike[]
   userInfo:Signal<ILogedUser>  = computed(() => this._AuthenticationService.userInfo() );
   ngOnInit(){
     this._PostsService.GetAllPosts().subscribe({
@@ -62,6 +64,19 @@ export class HomeComponent {
         this._ToastrService.error(err.error.message)
       }
     })
+  }
+
+  PostLikes(postId:string){
+    this._PostsService.GetPostLikes(postId).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.postLikes = res.data.likes
+      }
+    })
+  }
+
+  SharePost(){
+    
   }
 
 

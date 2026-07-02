@@ -48,9 +48,50 @@
         </div>
 
         <div class="p-1">
-            <p class="text-black text-md hover:underline hover:cursor-pointer"> {{post.likes}} </p>
+            <!-- <p  class="text-black text-md hover:underline hover:cursor-pointer">
+                <span >   </span>
+            </p> -->
+
+            <!-- The button's popovertarget attribute points to the modal's ID. ID must be unique for each modal -->
+            <button (click)="PostLikes(post._id)" popovertarget="LikeList" class="text-black text-md  p-1 flex items-center justify-center rounded-full bg-gray-100">
+                <span class=" flex items-center p-1 justify-center"><i class="fa-solid fa-heart text-rose-500 "></i></span>
+                <span class="mx-1 hover:underline hover:cursor-pointer">{{post.likesCount}} Likes</span>
+            </button>
+
+            <div class="modal" id="LikeList" popover>
+                <div class="modal-box bg-white dark:bg-indigo-900 text-gray-500 dark:text-white">
+                    <p class="p-4 pb-2 text-xs opacity-60 tracking-wide">People liked this post</p>
+                    <ul class="list bg-white dark:bg-indigo-900 text-gray-500 dark:text-white rounded-box shadow-md">
+                        @for(like of postLikes; track like._id){
+                            <li class="list-row border-b-2 border-gray-200">
+                            <div class="w-[25px] h-[25px] xl:w-[40px] xl:h-[40px] rounded-full border-2 border-gray-600 dark:border-white p-1">
+                                <img class="w-full rounded-full" [src]="like.photo" alt="user like photo" />
+                            </div>
+                            <div>
+                                <div>
+                                    <h1>
+                                         {{like.name}} 
+                                    </h1>
+                                </div>
+                                <div class="text-xs uppercase font-semibold opacity-60">
+                                    <h3>
+                                        {{like.username}}
+                                    </h3>
+                                </div>
+                            </div>
+                            
+                        </li>
+                        }
+                    </ul>
+                </div>
+                <div class="modal-backdrop">
+                    <button  popovertarget="LikeList" popovertargetaction="hide">close</button>
+                </div>
+            </div>
         </div>
-        <div class="w-2/3 text-black mx-auto flex justify-between items-center">
+
+
+        <div class="post-actions w-2/3 text-black mx-auto flex justify-between items-center">
 
             <div class="likes">
                 <span (click)="LikePost(post._id)" class="cursor-pointer">

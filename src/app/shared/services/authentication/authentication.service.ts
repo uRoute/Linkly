@@ -5,6 +5,7 @@ import { environment } from '../../../../environment/environment';
 import { jwtDecode } from 'jwt-decode';
 import { ILogedUser } from '../../../core/interfaces/loggedUser/iloged-user';
 import { CookieService } from 'ngx-cookie-service';
+import { IUser } from '../../../core/interfaces/userDetails/iuser';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,6 @@ export class AuthenticationService {
   ) {}
 
   userInfo: WritableSignal<ILogedUser> = signal({} as ILogedUser);
-  
   decodeToken(token: string) {
     this.userInfo.update((old) => (old = jwtDecode(token)));
   }

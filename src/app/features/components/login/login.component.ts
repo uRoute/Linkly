@@ -38,6 +38,7 @@ export class LoginComponent {
           if(isPlatformBrowser(this._PLATFORM_ID)){
             this._CookieService.set('userToken', res.data.token);
             this._AuthenticationService.decodeToken(res.data.token)
+            isPlatformBrowser(this._PLATFORM_ID)?localStorage.setItem('userDetails' , JSON.stringify(res.data.user)):''
           }
         },
         error:(err)=>{

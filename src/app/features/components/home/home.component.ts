@@ -1,4 +1,4 @@
-import { Component, computed, inject, Signal } from '@angular/core';
+import { Component, computed, ElementRef, inject, Signal, ViewChild } from '@angular/core';
 import { PostsService } from '../../../shared/services/posts/posts.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,9 @@ import { AuthenticationService } from '../../../shared/services/authentication/a
 import { ILogedUser } from '../../../core/interfaces/loggedUser/iloged-user';
 import { CookieService } from 'ngx-cookie-service';
 import { ILike } from '../../../core/interfaces/likes/ilike';
+import { IUser } from '../../../core/interfaces/userDetails/iuser';
+import { CommentsAndRepliesService } from '../../../shared/services/comments/comments-and-replies.service';
+import { IComment } from '../../../core/interfaces/comment/icomment';
 
 @Component({
   selector: 'app-home',
@@ -19,11 +22,16 @@ export class HomeComponent {
 
   private _PostsService = inject(PostsService)
   private _AuthenticationService = inject(AuthenticationService)
+  private _CommentsAndRepliesService = inject(CommentsAndRepliesService)
   private _Router = inject(Router)
   private _ToastrService = inject(ToastrService)
   private _CookieService = inject(CookieService)
+
+  @ViewChild('comm') commentElemtn!:ElementRef<HTMLElement>
   posts:IPost[] = []
-  postLikes!:ILike[]
+  postLikes!:ILike[];
+  postComments!:IComment[]
+  userDetails!:IUser
   userInfo:Signal<ILogedUser>  = computed(() => this._AuthenticationService.userInfo() );
   ngOnInit(){
     this._PostsService.GetAllPosts().subscribe({
@@ -36,11 +44,17 @@ export class HomeComponent {
     if(this._CookieService.check('userToken')){
       this._AuthenticationService.decodeToken(this._CookieService.get('userToken'))
       console.log(this.userInfo());
+      this.userDetails = JSON.parse(localStorage.getItem('userDetails')!)
 
     }else{
       console.log('moshkla');
       
-    }    
+    }  
+    
+  }
+
+  ngAfterViewCheck(){
+    // (this.commentElemtn.nativeElement)<HTMLElement>
   }
   
   LikePost(postID:string){
@@ -77,6 +91,18 @@ export class HomeComponent {
 
   SharePost(){
     
+  }
+
+  CommentsOfPost(postID:string){
+    this._CommentsAndRepliesService.GetPostComments(postID).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.postComments = res.data.comments
+      },error:(err)=>{
+        console.log(err);
+        
+      }
+    })
   }
 
 

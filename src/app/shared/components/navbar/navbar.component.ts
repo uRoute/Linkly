@@ -28,8 +28,6 @@ export class NavbarComponent implements AfterViewInit {
     if(this._CookieService.check('userToken')){
       isPlatformBrowser(this._PLATFORM_ID) ? this.userDetails = JSON.parse(localStorage.getItem('userDetails')!) : ''
     }
-
-    
   }
 
   check(){

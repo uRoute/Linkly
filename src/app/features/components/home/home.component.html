@@ -1,4 +1,54 @@
 <div class="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[50%] mt-1  p-1  mx-auto">
+
+
+    <div #c_Modal
+        class="hidden fixed top-0 left-0 right-0 bottom-0  bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.1)] flex items-center justify-center">
+        <div class="w-full md:w-[80%] xl:w-[60%] bg-white shadow-sm shadow-gray-500/50 rounded-md p-1">
+            <div class="flex items-center justify-between px-3 py-2">
+                <span class="text-indigo-700/50">Comments</span>
+                <span (click)="closeModal()" class="cursor-pointer"> <i
+                        class="text-xl fa-solid fa-circle-xmark text-indigo-900"></i> </span>
+            </div>
+            <ul class="list text-black">
+                @for(comment of postComments ; track comment._id){
+                <li class="list-row border-b-2 border-gray-300">
+                    <div class="w-[25px] h-[25px] md:h-[40px] md:w-[40px]">
+                        <img alt="user comment photo" class="w-full rounded-full"
+                            [src]="comment.commentCreator.photo" />
+                    </div>
+                    <div>
+                        <div class="font-bold text-sm md:text-lg">
+                            {{comment.commentCreator.name}}
+                        </div>
+                        <div class="text-sm md:text-lg uppercase font-semibold opacity-60">
+                            {{comment.createdAt | date :'short'}}
+                        </div>
+                        <p class="font-semibold my-2 text-sm md:text-lg"> {{comment.content}} </p>
+                        <div class="flex items-center">
+                            <span><i class="fa-solid fa-reply fa-rotate-180"></i></span>
+                            <input
+                                class="ml-1 py-1 transition-all duration-100 outline-0 px-2 rounded-full bg-gray-50 w-full focus:outline-0 focus:inset-shadow-sm focus:inset-shadow-indigo-800/50"
+                                type="text" id="comment" placeholder="Type your Reply ....">
+                        </div>
+                    </div>
+
+                    <button (click)="likeComment(comment.post , comment._id)" title="like comment"
+                        class="flex items-center gap-x-1">
+                        @if(comment.likes.includes(userInfo().user)){
+                        <i class="fa-solid fa-heart text-yellow-400 text-lg"></i>
+                        }@else{
+                        <i class="fa-regular fa-heart text-lg"></i>
+                        }
+                        <span> {{comment.likes.length}} </span>
+                    </button>
+                </li>
+                }@empty {
+                <p class="text-xl font-bold text-gray-700/50 text-center m-2 p-2">No comments yet!</p>
+                }
+            </ul>
+        </div>
+    </div>
+
     @if(posts.length>=0 ){
     @for(post of posts ; track post.id){
 
@@ -102,7 +152,7 @@
                 </span>
                 @if(post.likes.length > 0){<span> {{post.likesCount}} </span>}
             </div>
-            <div #comm (click)="CommentsOfPost(post._id)"
+            <div (click)="showModal()" (click)="CommentsOfPost(post._id)"
                 class="comments cursor-pointer btn bg-transparent text-black border-none shadow-none">
                 <span>
                     <i class="fa-regular fa-comment"></i>
@@ -131,26 +181,7 @@
             </div>
         </div>
 
-        <div #commentModal class="hidden fixed top-0 left-0 right-0 bottom-0  bg-[rgba(230,230,230,0.1)] dark:bg-[rgba(0,0,0,0.1)] flex items-center justify-center">
-            <div class="w-[60%] md:w-[80%] xl:w-[60%] bg-white shadow-sm shadow-gray-500/50 rounded-md p-1">
-                <div class="flex items-center justify-between px-3">
-                    <span class="text-indigo-700/50">Comments</span>
-                    <span> <i class="fa-solid fa-circle-xmark text-indigo-900"></i> </span>
-                </div>
-                <ul class="list">
-                    <li class="list-row">
-                        <div class="w-[25px] h-[25px] md:h-[40px] md:w-[40px]">
-                            <img alt="user comment photo" class="w-full rounded-full" src="https://img.daisyui.com/images/profile/demo/1@94.webp" />
-                        </div>
-                        <div>
-                            <div>Dio Lupa</div>
-                            <div class="text-xs uppercase font-semibold opacity-60">Remaining Reason</div>
-                        </div>
-                        <button title="like comment" class=""> <i class="fa-regular fa-heart"></i> <i class="fa-solid fa-heart"></i> </button>
-                    </li>
-                </ul>
-            </div>
-        </div>
+
 
 
     </div>

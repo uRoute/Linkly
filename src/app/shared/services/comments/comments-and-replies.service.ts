@@ -14,4 +14,8 @@ export class CommentsAndRepliesService {
     return this._HttpClient.get(`${environment.baseURL}/posts/${postID}/comments?page=1&limit=10`)
   }
 
+  LikeComment(postID:string , commentID:string):Observable<any>{
+    return this._HttpClient.put(`${environment.baseURL}/posts/${postID}/comments/${commentID}/like`,{})
+  }
+
 }

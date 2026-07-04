@@ -1,4 +1,4 @@
-import { Component, computed, ElementRef, inject, Signal, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, computed, ElementRef, inject, Signal, ViewChild } from '@angular/core';
 import { PostsService } from '../../../shared/services/posts/posts.service';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -18,8 +18,9 @@ import { IComment } from '../../../core/interfaces/comment/icomment';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit{
 
+  @ViewChild('c_Modal') commentModal!:ElementRef<HTMLElement>
   private _PostsService = inject(PostsService)
   private _AuthenticationService = inject(AuthenticationService)
   private _CommentsAndRepliesService = inject(CommentsAndRepliesService)
@@ -27,7 +28,6 @@ export class HomeComponent {
   private _ToastrService = inject(ToastrService)
   private _CookieService = inject(CookieService)
 
-  @ViewChild('commentModal') commentModal!:ElementRef
   posts:IPost[] = []
   postLikes!:ILike[];
   postComments!:IComment[]
@@ -54,9 +54,19 @@ export class HomeComponent {
   }
 
   ngAfterViewInit(){
-    console.log(this.commentModal);
+
+    // console.log(this.commentModal.nativeElement.classList);
   }
   
+  showModal(){
+    this.commentModal.nativeElement.classList.remove('hidden')
+  }
+  closeModal(){
+    this.commentModal.nativeElement.classList.add('hidden')
+  }
+
+
+
   LikePost(postID:string){
     this._PostsService.LikesOnPost(postID).subscribe({
       next:(res)=>{
@@ -92,17 +102,23 @@ export class HomeComponent {
   SharePost(){
     
   }
-
-  commentOverLay(){
-    
-  }
-
   CommentsOfPost(postID:string){
     this.postComments = []
     this._CommentsAndRepliesService.GetPostComments(postID).subscribe({
       next:(res)=>{
         console.log(res);
         this.postComments = res.data.comments
+      },error:(err)=>{
+        console.log(err);
+        
+      }
+    })
+  }
+  likeComment(postID:string , commentId:string){
+    this._CommentsAndRepliesService.LikeComment(postID,commentId).subscribe({
+      next:(res)=>{
+        console.log(res);
+        // this.CommentsOfPost(postID)
       },error:(err)=>{
         console.log(err);
         

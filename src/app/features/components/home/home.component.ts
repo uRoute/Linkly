@@ -27,7 +27,7 @@ export class HomeComponent {
   private _ToastrService = inject(ToastrService)
   private _CookieService = inject(CookieService)
 
-  @ViewChild('comm') commentElemtn!:ElementRef<HTMLElement>
+  @ViewChild('commentModal') commentModal!:ElementRef
   posts:IPost[] = []
   postLikes!:ILike[];
   postComments!:IComment[]
@@ -53,8 +53,8 @@ export class HomeComponent {
     
   }
 
-  ngAfterViewCheck(){
-    // (this.commentElemtn.nativeElement)<HTMLElement>
+  ngAfterViewInit(){
+    console.log(this.commentModal);
   }
   
   LikePost(postID:string){
@@ -93,7 +93,12 @@ export class HomeComponent {
     
   }
 
+  commentOverLay(){
+    
+  }
+
   CommentsOfPost(postID:string){
+    this.postComments = []
     this._CommentsAndRepliesService.GetPostComments(postID).subscribe({
       next:(res)=>{
         console.log(res);

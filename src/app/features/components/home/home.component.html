@@ -1,12 +1,9 @@
 <div class="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[50%] mt-1  p-1  mx-auto">
-
-
     @if(posts.length>=0 ){
-
     @for(post of posts ; track post.id){
 
     <div
-        class="post text-black bg-white my-3 border-2 border-gray-200 shadow-md shadow-gray-400 dark:white p-2 rounded-md">
+        class="post  text-black bg-white my-3 border-2 border-gray-200 shadow-md shadow-gray-400 dark:white p-2 rounded-md">
 
         <div class="post-head flex justify-between items-center">
 
@@ -121,7 +118,6 @@
         </div>
 
         <div class="text-black mt-1 border-t-2 border-gray-200 p-2">
-
             <div class="user-comment bg-gray-100 p-2 rounded-md flex items-center  gap-x-1">
                 <div
                     class="user-comment-img flex items-center justify-center w-[35px] h-[35px] md:w-[25px] md:h-[25px] rounded-full border-2 border-indigo-500">
@@ -133,51 +129,33 @@
                         type="text" id="comment" placeholder="Type your comment ....">
                 </div>
             </div>
+        </div>
 
-
-            <div class="post-comment-list">
-                <ul class="list bg-white dark:bg-indigo-900 text-gray-500 dark:text-white rounded-box shadow-md">
-                    @for(comment of postComments; track comment._id){
-                    <li class="list-row border-b-2 border-gray-200">
-                        <div
-                            class="w-[25px] h-[25px] xl:w-[40px] xl:h-[40px] rounded-full border-2 border-gray-600 dark:border-white p-1">
-                            <img class="w-full rounded-full" [src]="comment.commentCreator.photo"
-                                alt="user like photo" />
+        <div #commentModal class="hidden fixed top-0 left-0 right-0 bottom-0  bg-[rgba(230,230,230,0.1)] dark:bg-[rgba(0,0,0,0.1)] flex items-center justify-center">
+            <div class="w-[60%] md:w-[80%] xl:w-[60%] bg-white shadow-sm shadow-gray-500/50 rounded-md p-1">
+                <div class="flex items-center justify-between px-3">
+                    <span class="text-indigo-700/50">Comments</span>
+                    <span> <i class="fa-solid fa-circle-xmark text-indigo-900"></i> </span>
+                </div>
+                <ul class="list">
+                    <li class="list-row">
+                        <div class="w-[25px] h-[25px] md:h-[40px] md:w-[40px]">
+                            <img alt="user comment photo" class="w-full rounded-full" src="https://img.daisyui.com/images/profile/demo/1@94.webp" />
                         </div>
                         <div>
-                            <div>
-                                <h1>
-                                    {{comment.commentCreator.name}}
-                                </h1>
-                            </div>
-                            <div class="text-xs uppercase font-semibold opacity-60">
-                                <h3>
-                                    {{comment.commentCreator.username}}
-                                </h3>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-md text-gray-700"> {{comment.content}} </p>
-                            </div>
+                            <div>Dio Lupa</div>
+                            <div class="text-xs uppercase font-semibold opacity-60">Remaining Reason</div>
                         </div>
-
+                        <button title="like comment" class=""> <i class="fa-regular fa-heart"></i> <i class="fa-solid fa-heart"></i> </button>
                     </li>
-                    }@empty {
-                    <div class="bg-white p-2 rounded-md">
-                        <p>No comments yet!</p>
-                    </div>
-                    }
                 </ul>
             </div>
-
-
-
         </div>
 
 
     </div>
 
     }
-
     }@else {
     <div class="w-[230px] my-3 xl:w-[600px] p-2 bg-white rounded-md">
         <div class="flex my-3 w-full  flex-col gap-4">
@@ -204,7 +182,4 @@
         </div>
     </div>
     }
-
-
-
 </div>

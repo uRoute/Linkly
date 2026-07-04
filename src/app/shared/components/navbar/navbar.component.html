@@ -1,42 +1,51 @@
-<div #nav class="navbar inset-shadow-xs inset-shadow-indigo-800 bg-[rgba(100,100,100,0.246)] dark:bg-[rgba(227,226,226,0.246)] w-[98%] mt-[1%] mx-auto justify-between py-3 px-6 rounded-full text-black md:dark:text-white ">
+<div #nav
+    class="navbar inset-shadow-xs inset-shadow-indigo-800 bg-[rgba(100,100,100,0.246)] dark:bg-[rgba(227,226,226,0.246)] w-[98%] mt-[1%] mx-auto justify-between py-3 px-6 rounded-full text-black md:dark:text-white ">
     <div class="">
-        <a routerLink="/" class="font-bold text-xl">Linkly</a>
+        <a routerLink="/" class="text-xl text-extrabold text-black dark:text-white">Linkly</a>
     </div>
     <div class=" md:flex hidden">
         <ul class="menu   menu-horizontal px-1">
             @if(!isUserLogged()){
-                <li class="font-bold text-lg"><a routerLink="/login">Log in</a></li>
-                <li class="font-bold text-lg"><a routerLink="/register">Signup</a></li>
+            <li class="font-bold text-lg"><a routerLink="/login">Log in</a></li>
+            <li class="font-bold text-lg"><a routerLink="/register">Signup</a></li>
             }@if(isUserLogged()) {
-                <div class="flex items-center p-2 rounded-full bg-gray-100 text-black">
-                    <li class="font-bold text-lg"><a routerLink="/home"><i class="fa-solid text-indigo-800 fa-house-user "></i></a></li>
-                <li class="font-bold text-lg"><a routerLink="/user_profile"><img class="w-[25px] h-[25px] rounded-full bg-indigo-900 p-[0.1rem]" [src]="userDetails.photo" alt=""> <span class="text-indigo-800  hidden lg:inline font-extrabold">{{userDetails.username}}</span>  </a></li> 
-                <li class="font-bold text-lg"><a (click)="LogOut()" class="cursor-pointer"> <i class="fa-solid fa-arrow-right-from-bracket text-indigo-800 "></i> </a></li> 
-                </div>
+            <div class="flex items-center p-2 rounded-full bg-gray-100 text-black">
+                <li class="font-bold text-lg"><a routerLink="/home"><i
+                            class="fa-solid text-indigo-800 fa-house-user "></i></a></li>
+                <li class="font-bold text-lg"><a routerLink="/user_profile"><img
+                            class="w-[25px] h-[25px] rounded-full bg-indigo-900 p-[0.1rem]" [src]="userDetails.photo"
+                            alt=""> </a></li>
+                <!-- <span hidden md:inline class="text-indigo-800  hidden lg:inline font-extrabold">{{userDetails.username}}</span>   -->
+                <li class="font-bold text-lg"><a (click)="LogOut()" class="cursor-pointer"> <i
+                            class="fa-solid fa-arrow-right-from-bracket text-indigo-800 "></i> </a></li>
+            </div>
             }
 
-                       
+
         </ul>
     </div>
     <div class="dropdown dropdown-end md:hidden">
-        <label tabindex="0" class="btn btn-ghost btn-circle flex items-center justify-center text-2xl hover:bg-transparent text-black">
+        <label tabindex="0"
+            class="btn btn-ghost btn-circle flex items-center justify-center text-2xl hover:bg-transparent text-black">
             <i class="fa-solid fa-bars-staggered"></i>
         </label>
         <ul tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-white">
             @if(!isUserLogged()){
-                <li class="font-bold text-lg"><a routerLink="/login">Log in</a></li>
-                <li class="font-bold text-lg"><a routerLink="/register">Signup</a></li>
+            <li class="font-bold text-lg"><a routerLink="/login">Log in</a></li>
+            <li class="font-bold text-lg"><a routerLink="/register">Signup</a></li>
             }@if(isUserLogged()) {
-                <li class="font-bold text-lg"><a routerLink="/home">Home<i class="text-indigo-800 fa-solid fa-house-user"></i></a></li>
-                <li class="font-bold text-lg"><a routerLink="/user_profile">Profile <i class=" text-indigo-800 fa-solid fa-bell fa-rotate-by"></i> <img src="" alt=""> </a></li> 
+            <li class="font-bold text-lg"><a routerLink="/home">Home<i
+                        class="text-indigo-800 fa-solid fa-house-user"></i></a></li>
+            <li class="font-bold text-lg"><a routerLink="/user_profile">Profile <i
+                        class=" text-indigo-800 fa-solid fa-bell fa-rotate-by"></i> <img src="" alt=""> </a></li>
             }
         </ul>
     </div>
 
 
 
-    
+
     <div class="">
         <label class="flex justify-center items-center cursor-pointer gap-2">
 
@@ -44,7 +53,8 @@
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
-            <input placeholder="darkmode toggle" (click)="check()" #dark type="checkbox" value="synthwave" class="toggle theme-controller border-gray-600 dark:inset-shadow-xs inset-shadow-red-50" />
+            <input placeholder="darkmode toggle" (click)="check()" #dark type="checkbox" value="synthwave"
+                class="toggle theme-controller border-gray-600 dark:inset-shadow-xs inset-shadow-red-50" />
 
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

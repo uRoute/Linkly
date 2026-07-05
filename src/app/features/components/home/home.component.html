@@ -1,37 +1,29 @@
 <div class="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[50%] mt-1  p-1  mx-auto">
-
-
-    <div #c_Modal
-        class="hidden fixed top-0 left-0 right-0 bottom-0  bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.1)] flex items-center justify-center">
+    <div #c_Modal class="hidden fixed top-0 left-0 right-0 bottom-0  bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.1)] flex items-center justify-center">
         <div class="w-full md:w-[80%] xl:w-[60%] bg-white shadow-sm shadow-gray-500/50 rounded-md p-1">
             <div class="flex items-center justify-between px-3 py-2">
                 <span class="text-indigo-700/50">Comments</span>
-                <span (click)="closeModal()" class="cursor-pointer"> <i
-                        class="text-xl fa-solid fa-circle-xmark text-indigo-900"></i> </span>
+                <span (click)="closeModal()" class="cursor-pointer"> <i class="text-xl fa-solid fa-circle-xmark text-indigo-900"></i> </span>
             </div>
             <ul class="list text-black">
                 @for(comment of postComments ; track comment._id){
                 <li class="list-row border-b-2 border-gray-300">
                     <div class="w-[25px] h-[25px] md:h-[40px] md:w-[40px]">
-                        <img alt="user comment photo" class="w-full rounded-full"
-                            [src]="comment.commentCreator.photo" />
+                        <img alt="user comment photo" class="w-full rounded-full" [src]="comment.commentCreator.photo" />
                     </div>
                     <div>
                         <div class="font-bold text-sm md:text-lg">
                             {{comment.commentCreator.name}}
                         </div>
-                        <div class="text-sm md:text-lg uppercase font-semibold opacity-60">
+                        <div class="text-xs md:text-sm uppercase font-semibold opacity-60">
                             {{comment.createdAt | date :'short'}}
                         </div>
                         <p class="font-semibold my-2 text-sm md:text-lg"> {{comment.content}} </p>
                         <div class="flex items-center">
                             <span><i class="fa-solid fa-reply fa-rotate-180"></i></span>
-                            <input
-                                class="ml-1 py-1 transition-all duration-100 outline-0 px-2 rounded-full bg-gray-50 w-full focus:outline-0 focus:inset-shadow-sm focus:inset-shadow-indigo-800/50"
-                                type="text" id="comment" placeholder="Type your Reply ....">
+                            <input class="ml-1 py-1 transition-all duration-100 outline-0 px-2 rounded-full bg-gray-50 w-full focus:outline-0 focus:inset-shadow-sm focus:inset-shadow-indigo-800/50" type="text" id="comment" placeholder="Type your Reply ....">
                         </div>
                     </div>
-
                     <button (click)="likeComment(comment.post , comment._id)" title="like comment"
                         class="flex items-center gap-x-1">
                         @if(comment.likes.includes(userInfo().user)){
@@ -48,13 +40,9 @@
             </ul>
         </div>
     </div>
-
     @if(posts.length>=0 ){
     @for(post of posts ; track post.id){
-
-    <div
-        class="post  text-black bg-white my-3 border-2 border-gray-200 shadow-md shadow-gray-400 dark:white p-2 rounded-md">
-
+    <div class="post  text-black bg-white my-3 border-2 border-gray-200 shadow-md shadow-gray-400 dark:white p-2 rounded-md">
         <div class="post-head flex justify-between items-center">
 
             <div class="flex justify-between items-center gap-x-1">
@@ -84,7 +72,6 @@
             </div>
 
         </div>
-
         <div class="post-body p-2">
             <h2 class="font-semibold text-black  text-md mb-1"> {{post.body }}</h2>
             @if(post.image){
@@ -93,7 +80,6 @@
             </div>
             }
         </div>
-
         <div class="p-1">
             <!-- <p  class="text-black text-md hover:underline hover:cursor-pointer">
                 <span >   </span>
@@ -139,7 +125,6 @@
                 </div>
             </div>
         </div>
-
         <div class="post-actions  w-2/3 text-black mx-auto flex justify-between items-center">
 
             <div class="likes">
@@ -166,7 +151,6 @@
             </div>
 
         </div>
-
         <div class="text-black mt-1 border-t-2 border-gray-200 p-2">
             <div class="user-comment bg-gray-100 p-2 rounded-md flex items-center  gap-x-1">
                 <div
@@ -180,12 +164,7 @@
                 </div>
             </div>
         </div>
-
-
-
-
     </div>
-
     }
     }@else {
     <div class="w-[230px] my-3 xl:w-[600px] p-2 bg-white rounded-md">

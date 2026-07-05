@@ -27,30 +27,30 @@ export class HomeComponent implements AfterViewInit{
   private _Router = inject(Router)
   private _ToastrService = inject(ToastrService)
   private _CookieService = inject(CookieService)
-
   posts:IPost[] = []
   postLikes!:ILike[];
   postComments!:IComment[]
   userDetails!:IUser
   userInfo:Signal<ILogedUser>  = computed(() => this._AuthenticationService.userInfo() );
   ngOnInit(){
+    if(this._CookieService.check('userToken')){
+      this._AuthenticationService.decodeToken(this._CookieService.get('userToken'))
+      console.log(this.userInfo());
+      this.userDetails = JSON.parse(localStorage.getItem('userDetails')!)
+    }else{
+      console.log('moshkla');
+    }  
+
+    this.getAllPosts()
+  }
+
+  getAllPosts(){
     this._PostsService.GetAllPosts().subscribe({
       next:(res)=>{
         this.posts = res.data.posts;
         console.log(res);
       }
     })
-
-    if(this._CookieService.check('userToken')){
-      this._AuthenticationService.decodeToken(this._CookieService.get('userToken'))
-      console.log(this.userInfo());
-      this.userDetails = JSON.parse(localStorage.getItem('userDetails')!)
-
-    }else{
-      console.log('moshkla');
-      
-    }  
-    
   }
 
   ngAfterViewInit(){
@@ -70,7 +70,7 @@ export class HomeComponent implements AfterViewInit{
   LikePost(postID:string){
     this._PostsService.LikesOnPost(postID).subscribe({
       next:(res)=>{
-        this.ngOnInit()
+        this.getAllPosts()
       },
       error:(err)=>{
         this._ToastrService.error(err.error.message)
@@ -82,7 +82,7 @@ export class HomeComponent implements AfterViewInit{
     this._PostsService.BookmarkPosts(postID).subscribe({
       next:(res)=>{
         // this._ToastrService.success(res.message)
-        this.ngOnInit()
+        this.getAllPosts()
       },
       error:(err)=>{
         this._ToastrService.error(err.error.message)

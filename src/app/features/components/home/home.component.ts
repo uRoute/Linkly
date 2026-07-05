@@ -68,6 +68,7 @@ export class HomeComponent implements AfterViewInit{
 
 
   LikePost(postID:string){
+
     this._PostsService.LikesOnPost(postID).subscribe({
       next:(res)=>{
         this.getAllPosts()
@@ -90,7 +91,9 @@ export class HomeComponent implements AfterViewInit{
     })
   }
 
-  PostLikes(postId:string){
+  PostLikes(postId:string,flag?:boolean){
+    flag ? null : this.postLikes = [] 
+
     this._PostsService.GetPostLikes(postId).subscribe({
       next:(res)=>{
         console.log(res);
@@ -125,8 +128,8 @@ export class HomeComponent implements AfterViewInit{
       }
     })
   }
-  replayOnComment(){
-    
+  replayOnComment(commentID:string,postID:string){
+    let replyFormData = new FormData();
   }
 
 

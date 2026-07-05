@@ -18,4 +18,8 @@ export class CommentsAndRepliesService {
     return this._HttpClient.put(`${environment.baseURL}/posts/${postID}/comments/${commentID}/like`,{})
   }
 
+  ReplyOnComment(formData:object,postID:string,commentID:string):Observable<any>{
+    return this._HttpClient.post(`${environment.baseURL}/posts/${postID}/comments/${commentID}/replies`,formData)
+  }
+
 }

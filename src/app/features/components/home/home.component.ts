@@ -102,8 +102,8 @@ export class HomeComponent implements AfterViewInit{
   SharePost(){
     
   }
-  CommentsOfPost(postID:string){
-    this.postComments = []
+  CommentsOfPost(postID:string,flag?:boolean){
+    flag ? null :this.postComments = [] 
     this._CommentsAndRepliesService.GetPostComments(postID).subscribe({
       next:(res)=>{
         console.log(res);
@@ -118,12 +118,15 @@ export class HomeComponent implements AfterViewInit{
     this._CommentsAndRepliesService.LikeComment(postID,commentId).subscribe({
       next:(res)=>{
         console.log(res);
-        // this.CommentsOfPost(postID)
+        this.CommentsOfPost(postID,true)
       },error:(err)=>{
         console.log(err);
         
       }
     })
+  }
+  replayOnComment(){
+    
   }
 
 

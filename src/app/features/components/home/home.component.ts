@@ -11,10 +11,11 @@ import { ILike } from '../../../core/interfaces/likes/ilike';
 import { IUser } from '../../../core/interfaces/userDetails/iuser';
 import { CommentsAndRepliesService } from '../../../shared/services/comments/comments-and-replies.service';
 import { IComment } from '../../../core/interfaces/comment/icomment';
-
+import { FormsModule } from '@angular/forms'; 
+import { IReply } from '../../../core/interfaces/replies/ireply';
 @Component({
   selector: 'app-home',
-  imports: [DatePipe],
+  imports: [DatePipe, FormsModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -31,6 +32,9 @@ export class HomeComponent implements AfterViewInit{
   postLikes!:ILike[];
   postComments!:IComment[]
   userDetails!:IUser
+  replyImgSrc!:File
+  replyConent:string = ''
+  commentReplies!:IReply[]
   userInfo:Signal<ILogedUser>  = computed(() => this._AuthenticationService.userInfo() );
   ngOnInit(){
     if(this._CookieService.check('userToken')){
@@ -117,6 +121,17 @@ export class HomeComponent implements AfterViewInit{
       }
     })
   }
+
+  repliesOfComment(postId:string , commentID:string,flag?:boolean){
+    flag ? null :this.commentReplies = [] 
+    this._CommentsAndRepliesService.GetCommentReplies(postId , commentID).subscribe({
+      next:(res)=>{
+        this.commentReplies = res.data.replies
+        console.log(this.commentReplies);
+                
+      }
+    })
+  }
   likeComment(postID:string , commentId:string){
     this._CommentsAndRepliesService.LikeComment(postID,commentId).subscribe({
       next:(res)=>{
@@ -128,8 +143,30 @@ export class HomeComponent implements AfterViewInit{
       }
     })
   }
+
+
+  holdReplyImag(e:Event){
+    console.log(e.target);
+    let inputFile = (e.target) as HTMLInputElement
+    if(inputFile.files && inputFile.files.length > 0){
+      this.replyImgSrc = inputFile.files[0];
+    }
+  }
   replayOnComment(commentID:string,postID:string){
-    let replyFormData = new FormData();
+    let replyFormData = new FormData()
+    this.replyImgSrc ? replyFormData.append('image' , this.replyImgSrc) : this.replyImgSrc = {} as File
+    console.log(this.replyImgSrc);
+    
+    replyFormData.append('content' , this.replyConent)
+    for( let [img,content] of replyFormData.entries() ){
+      console.log(img , content);
+    }
+    this._CommentsAndRepliesService.ReplyOnComment(replyFormData , postID , commentID).subscribe({
+      next:(res)=>{
+        console.log(res);
+      }
+    })
+    
   }
 
 

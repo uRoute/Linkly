@@ -109,6 +109,8 @@ export class HomeComponent implements AfterViewInit{
   SharePost(){
     
   }
+
+  // post details
   CommentsOfPost(postID:string,flag?:boolean){
     flag ? null :this.postComments = [] 
     this._CommentsAndRepliesService.GetPostComments(postID).subscribe({
@@ -121,7 +123,6 @@ export class HomeComponent implements AfterViewInit{
       }
     })
   }
-
   repliesOfComment(postId:string , commentID:string,flag?:boolean){
     flag ? null :this.commentReplies = [] 
     this._CommentsAndRepliesService.GetCommentReplies(postId , commentID).subscribe({
@@ -143,8 +144,7 @@ export class HomeComponent implements AfterViewInit{
       }
     })
   }
-
-
+  // Replies
   holdReplyImag(e:Event){
     console.log(e.target);
     let inputFile = (e.target) as HTMLInputElement
@@ -166,7 +166,6 @@ export class HomeComponent implements AfterViewInit{
         console.log(res);
       }
     })
-    
   }
 
 

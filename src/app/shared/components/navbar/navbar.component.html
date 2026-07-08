@@ -5,10 +5,11 @@
     </div>
     <div class=" md:flex hidden">
         <ul class="menu menu-horizontal px-1">
-            @if(!isUserLogged()){
+            <!-- @if(!isUserLogged()){
             <li class="font-bold text-lg"><a routerLink="/login">Log in</a></li>
             <li class="font-bold text-lg"><a routerLink="/register">Signup</a></li>
-            }@if(isUserLogged()) {
+            } -->
+            @if(isUserLogged()) {
             <div class="flex items-center p-2 rounded-full bg-gray-100 text-black">
                 <li class="font-bold text-lg hover:rounded-full"><a routerLink="/home"><i
                             class="fa-solid text-indigo-800 fa-house-user "></i></a></li>
@@ -24,17 +25,19 @@
 
         </ul>
     </div>
+
+    
     <div class="dropdown dropdown-end md:hidden">
-        <label tabindex="0"
-            class="btn btn-ghost btn-circle flex items-center justify-center text-2xl hover:bg-transparent text-black">
+        <label tabindex="0" class="btn btn-ghost btn-circle flex items-center justify-center text-2xl hover:bg-transparent text-black">
             <i class="fa-solid fa-bars-staggered"></i>
         </label>
         <ul tabindex="0"
             class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 text-white">
-            @if(!isUserLogged()){
+            <!-- @if(!isUserLogged()){
             <li class="font-bold text-lg"><a routerLink="/login">Log in</a></li>
             <li class="font-bold text-lg"><a routerLink="/register">Signup</a></li>
-            }@if(isUserLogged()) {
+            } -->
+            @if(isUserLogged()) {
             <li class="font-bold text-lg"><a routerLink="/home">Home<i
                         class="text-indigo-800 fa-solid fa-house-user"></i></a></li>
             <li class="font-bold text-lg"><a routerLink="/user_profile">Profile <i

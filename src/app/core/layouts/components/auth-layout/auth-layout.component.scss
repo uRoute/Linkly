@@ -1,3 +1,15 @@
-.parent{
-    min-height: 100vh;
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Permanent+Marker&display=swap');
+.parent {
+  min-height: 100vh;
+}
+.title-font{
+    font-family: "Lato", sans-serif;
+    
+}
+.head {
+  // background-color: rgba(227, 226, 226, 0.246);
+  filter: blur(15px);
+  backdrop-filter: blur(10px);
+  -webkit-filter: blur(0.2px);
+  box-shadow: inset 0px 0px 5px 0px white;
 }

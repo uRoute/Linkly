@@ -1,4 +1,20 @@
 <app-navbar [isUserLogged]="false"></app-navbar>
-<div class="parent pt-[65px] flex justify-center items-center bg-gray-200 text-black px-10 dark:bg-slate-800 dark:text-white">
-    <router-outlet></router-outlet>
+<div
+    class="parent pt-[75px] flex flex-wrap justify-center items-center bg-gray-200 text-black px-10 dark:bg-slate-800 dark:text-white">
+
+    <div class="w-full p-3 rounded-md">
+        <h1 class="font-bold text-center text-3xl "><span class="text-5xl title-font text-indigo-800 dark:text-indigo-300 ">Welcome,</span><br> to Linkly Social App</h1>
+        <div class="head bg-[rgba(250,250,250,0.4)] dark:bg-[rgba(227,226,226,0.246)] blur-[5px] flex items-center justify-evenly gap-x-2 px-3 py-2 rounded-full mx-auto my-3 w-[60%] md:w-1/8">
+            <button routerLinkActive="inset-shadow-sm inset-shadow-gray-300/50 font-bold dark:inset-shadow-gray-50/50 rounded-full bg-[rgba(255,255,255,0.7)] dark:bg-[rgba(255,255,255,0.2)] backdrop-blur-[5px]" routerLink="/login" class="px-2 py-1 block cursor-pointer">Login</button>
+            <button routerLinkActive="inset-shadow-sm inset-shadow-gray-300/50 font-bold dark:inset-shadow-gray-50/50 rounded-full bg-[rgba(255,255,255,0.7)] dark:bg-[rgba(255,255,255,0.2)] backdrop-blur-[10px]" routerLink="/register" class="px-2 py-1 block cursor-pointer">Register</button>
+        </div>
+    </div>
+
+    <!-- 
+    bg-neutral-200/50 dark:bg-neutral-100/50 backdrop-blur-[30px] border border-2 border-neutral-300/50
+bg-neutral-200/50 dark:bg-neutral-100/50 backdrop-blur-[30px] border border-2 border-neutral-300/50
+    -->
+    <div class="w-full">
+        <router-outlet></router-outlet>
+    </div>
 </div>

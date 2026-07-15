@@ -1,97 +1,113 @@
 <div class="w-[95%] md:w-[80%] lg:w-[60%] xl:w-[50%] mt-1  p-1  mx-auto">
-    <div #c_Modal
-        class="hidden fixed top-0 left-0 right-0 bottom-0  bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.1)] flex items-center justify-center">
-        <div
-            class=" w-full max-h-[400px] overflow-auto md:w-[80%] xl:w-[60%] bg-white shadow-sm shadow-gray-500/50 rounded-md p-1">
-            <div class=" bg-gray-100/50  rounded-md flex items-center justify-between px-3 py-2">
-                <span class="text-indigo-700/50">Comments</span>
-                <span (click)="closeModal()" class="cursor-pointer"> <i
-                        class="text-xl fa-solid fa-circle-xmark text-indigo-900"></i> </span>
-            </div>
-            <ul class="list text-black">
-                @for(comment of postComments ; track comment._id){
-                <li class="list-row justify-evenly border-b-2 border-gray-300">
-                    <div class="w-[25px] h-[25px] md:h-[60px] md:w-[60px]">
-                        <img alt="user comment photo" class="w-full h-full rounded-full"
-                            [src]="comment.commentCreator.photo" />
-                    </div>
-                    <div class="">
-                        <div class="font-bold text-sm md:text-lg">
-                            {{comment.commentCreator.name}}
-                        </div>
-                        <div class="text-xs md:text-xs uppercase font-semibold opacity-60">
-                            {{comment.createdAt | date :'short'}}
-                        </div>
-                        <div>
-                            <p class="font-medium my-2 text-sm md:text-lg"> {{comment.content}} </p>
-                            <span (click)="repliesOfComment(comment.post , comment._id)"
-                                class="underline cursor-pointer">Replies {{comment.repliesCount}} </span>
-
-                            <div class="c_replies_list">
-                                <ul class="list text-black">
-                                    @for(reply of commentReplies ; track reply._id){
-                                    <li class="list-row border-b-2 border-gray-300">
-                                        <div class="w-[20px] h-[20px]">
-                                            <img class="w-full h-full rounded-full" [src]="reply.commentCreator.photo"
-                                                alt="user photo">
-                                        </div>
-                                        <div>
-                                            <div class="font-bold text-sm md:text-md">
-                                                {{reply.commentCreator.name}}
-                                            </div>
-                                            <div class="reply_content flex items-center">
-                                                <div class="font-bold text-sm md:text-md">
-                                                    {{reply.content}}
-                                                </div>
-                                                @if(reply.image){
-                                                <div class="w-[200px] h-[200px] rounded-md">
-                                                    <img class="w-full h-full rounded-lg" [src]="reply.image"
-                                                        alt="reply image">
-                                                </div>
-                                                }
-                                            </div>
-                                        </div>
-                                    </li>
-                                    }
-                                </ul>
+    <div #c_Modal class="hidden fixed top-0 left-0 right-0 bottom-0  bg-[rgba(255,255,255,0.5)] dark:bg-[rgba(0,0,0,0.1)] flex items-center justify-center">
+        <div class="w-full max-h-[400px] overflow-auto md:w-[80%] xl:w-[60%] bg-white shadow-sm shadow-gray-500/50 rounded-md p-1">
+            <div class="relative">
+                <div class="sticky top-0 left-0 right-0 bg-gray-100 z-[2]  rounded-md flex items-center justify-between px-3 py-2">
+                    <span class="text-indigo-700">Comments</span>
+                    <span (click)="closeModal()" class="cursor-pointer"> <i
+                            class="text-xl fa-solid fa-circle-xmark text-indigo-900"></i> </span>
+                </div>
+                <div>
+                    <ul class="list text-black">
+                        @for(comment of postComments ; track comment._id){
+                        <li class="list-row justify-evenly border-b-2 border-gray-300">
+                            <div class="w-[25px] h-[25px] md:h-[60px] md:w-[60px]">
+                                <img alt="user comment photo" class="w-full h-full rounded-full"
+                                    [src]="comment.commentCreator.photo" />
                             </div>
-                        </div>
+                            <div class="">
+                                <div class="font-bold text-sm md:text-lg">
+                                    {{comment.commentCreator.name}}
+                                </div>
+                                <div class="text-xs md:text-xs uppercase font-semibold opacity-60">
+                                    {{comment.createdAt | date :'short'}}
+                                </div>
+                                <div>
+                                    <p class="font-medium my-2 text-sm md:text-lg"> {{comment.content}} </p>
+                                    <span (click)="repliesOfComment(comment.post , comment._id)"
+                                        class="underline cursor-pointer">Replies {{comment.repliesCount}} </span>
 
-                        <div class="flex items-center">
-                            <span><i class="fa-solid fa-reply fa-rotate-180"></i></span>
-                            <!-- <input class="ml-1 py-1 transition-all duration-100 outline-0 px-2 rounded-full bg-gray-50 w-full focus:outline-0 focus:inset-shadow-sm focus:inset-shadow-indigo-800/50" type="text" id="comment" placeholder="Type your Reply ...."> -->
-                            <div class="w-full md:w-2/3 bg-gray-100/50 rounded-lg p-2 mx-1 my-2">
-                                <input [(ngModel)]="replyConent" type="text"
-                                    class="outline-0 focus:border-none w-full p-2" placeholder="Type your reply ....">
-                                <div
-                                    class="border-t-2 border-gray-300 flex items-center justify-between overflow-hidden">
-                                    <label for="r_img"
-                                        class="r_img bg-white p-4 flex items-center justify-center m-2 w-5 h-5  text-lg rounded-lg ">
-                                        <span><i class="fa-solid fa-images text-indigo-800"></i></span>
-                                        <input (change)="holdReplyImag($event)" type="file" id="r_img"
-                                            class="w-[10%] bg-yellow-200">
-                                    </label>
-                                    <button [disabled]="!replyConent"
-                                        (click)="replayOnComment(comment._id , comment.post)"
-                                        class="btn btn-soft btn-primary">Reply</button>
+                                    <div class="c_replies_list">
+                                        <ul class="list text-black">
+                                            @for(reply of commentReplies ; track reply._id){
+                                            <li class="list-row border-b-2 border-gray-300">
+                                                <div class="w-[20px] h-[20px]">
+                                                    <img class="w-full h-full rounded-full"
+                                                        [src]="reply.commentCreator.photo" alt="user photo">
+                                                </div>
+                                                <div>
+                                                    <div class="font-bold text-sm md:text-md">
+                                                        {{reply.commentCreator.name}}
+                                                    </div>
+                                                    <div class="reply_content flex items-center">
+                                                        <div class="font-bold text-sm md:text-md">
+                                                            {{reply.content}}
+                                                        </div>
+                                                        @if(reply.image){
+                                                        <div class="w-[200px] h-[200px] rounded-md">
+                                                            <img class="w-full h-full rounded-lg" [src]="reply.image"
+                                                                alt="reply image">
+                                                        </div>
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <span><i class="fa-solid fa-reply fa-rotate-180"></i></span>
+                                    <!-- <input class="ml-1 py-1 transition-all duration-100 outline-0 px-2 rounded-full bg-gray-50 w-full focus:outline-0 focus:inset-shadow-sm focus:inset-shadow-indigo-800/50" type="text" id="comment" placeholder="Type your Reply ...."> -->
+                                    <div class="w-full md:w-2/3 bg-gray-100/50 rounded-lg p-2 mx-1 my-2">
+                                        <input [(ngModel)]="replyConent" type="text"
+                                            class="outline-0 focus:border-none w-full p-2"
+                                            placeholder="Type your reply ....">
+                                        <div
+                                            class="border-t-2 border-gray-300 flex items-center justify-between overflow-hidden">
+                                            <label for="r_img"
+                                                class="r_img bg-white p-4 flex items-center justify-center m-2 w-5 h-5  text-lg rounded-lg ">
+                                                <span><i class="fa-solid fa-images text-indigo-800"></i></span>
+                                                <input (change)="holdReplyImag($event)" type="file" id="r_img"
+                                                    class="w-[10%] bg-yellow-200">
+                                            </label>
+                                            <button [disabled]="!replyConent"
+                                                (click)="replayOnComment(comment._id , comment.post)"
+                                                class="btn btn-soft btn-primary">Reply</button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <button (click)="likeComment(comment.post , comment._id)" title="like comment"
+                                class="flex items-center gap-x-1 self-start">
+                                @if(comment.likes.includes(userInfo().user)){
+                                <i class="fa-solid fa-heart text-yellow-400 text-lg"></i>
+                                }@else{
+                                <i class="fa-regular fa-heart text-lg"></i>
+                                }
+                                <span> {{comment.likes.length}} </span>
+                            </button>
+                        </li>
+                        }@empty {
+                        <p class="text-xl font-bold text-gray-700/50 text-center m-2 p-2">No comments yet!</p>
+                        }
+                    </ul>
+                </div>
+                <div class="comment-list-comment z-[2] bg-gray-100/50 text-black mt-1 border-t-2 border-gray-200 p-2">
+                    <div class="user-comment bg-gray-100 p-2 rounded-md flex items-center  gap-x-1">
+                        <div
+                            class="user-comment-img flex items-center justify-center w-[35px] h-[35px] md:w-[25px] md:h-[25px] rounded-full border-2 border-indigo-500">
+                            <img class="w-full rounded-full block" [src]="userDetails.photo" alt="user photo">
+                        </div>
+                        <div class="w-full flex items-center justify-between">
+                            <input class="py-1 transition-all duration-100 outline-0 px-2 rounded-full bg-gray-50 w-[90%] focus:outline-0 focus:inset-shadow-sm focus:inset-shadow-indigo-800/50" type="text" id="comment" placeholder="Type your comment ....">
+                            <button class="px-2 py-1 mx-1 rounded-lg bg-indigo-600 hover:bg-indigo-800 hover:shadow-sm font-bold text-white hover:shadow-teal-900 transition-all duration-300">Comment</button>
                         </div>
                     </div>
-                    <button (click)="likeComment(comment.post , comment._id)" title="like comment"
-                        class="flex items-center gap-x-1 self-start">
-                        @if(comment.likes.includes(userInfo().user)){
-                        <i class="fa-solid fa-heart text-yellow-400 text-lg"></i>
-                        }@else{
-                        <i class="fa-regular fa-heart text-lg"></i>
-                        }
-                        <span> {{comment.likes.length}} </span>
-                    </button>
-                </li>
-                }@empty {
-                <p class="text-xl font-bold text-gray-700/50 text-center m-2 p-2">No comments yet!</p>
-                }
-            </ul>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -199,7 +215,7 @@
                     <i class="fa-regular fa-comment"></i>
                 </span>
                 <span> {{post.commentsCount}} </span>
-                    
+
 
             </div>
             <div class="shares">

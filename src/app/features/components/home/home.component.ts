@@ -37,6 +37,11 @@ export class HomeComponent implements AfterViewInit{
   replyConent:string = ''
   commentReplies!:IReply[]
   userInfo:Signal<ILogedUser>  = computed(() => this._AuthenticationService.userInfo() );
+  constructor(){
+  }
+
+
+
   ngOnInit(){
     if(this._CookieService.check('userToken')){
       this._AuthenticationService.decodeToken(this._CookieService.get('userToken'))

@@ -13,9 +13,10 @@ import { CommentsAndRepliesService } from '../../../shared/services/comments/com
 import { IComment } from '../../../core/interfaces/comment/icomment';
 import { FormsModule } from '@angular/forms'; 
 import { IReply } from '../../../core/interfaces/replies/ireply';
+import { ModalComponent } from "../../../shared/components/modal/modal.component";
 @Component({
   selector: 'app-home',
-  imports: [DatePipe, FormsModule],
+  imports: [DatePipe, FormsModule, ModalComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -167,6 +168,4 @@ export class HomeComponent implements AfterViewInit{
       }
     })
   }
-
-
 }

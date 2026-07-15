@@ -94,6 +94,7 @@
             </ul>
         </div>
     </div>
+
     @if(posts.length>=0 ){
     @for(post of posts ; track post.id){
     <div
@@ -198,6 +199,8 @@
                     <i class="fa-regular fa-comment"></i>
                 </span>
                 <span> {{post.commentsCount}} </span>
+                    
+
             </div>
             <div class="shares">
                 <span><i class="fa-regular fa-share-from-square"></i></span>

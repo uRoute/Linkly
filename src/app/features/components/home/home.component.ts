@@ -29,12 +29,14 @@ export class HomeComponent implements AfterViewInit{
   private _Router = inject(Router)
   private _ToastrService = inject(ToastrService)
   private _CookieService = inject(CookieService)
+  holdPostId:string = ''
   posts:IPost[] = []
   postLikes!:ILike[];
   postComments!:IComment[]
   userDetails!:IUser
-  replyImgSrc!:File
+  ImgSrc!:File
   replyConent:string = ''
+  commentConent:string = ''
   commentReplies!:IReply[]
   userInfo:Signal<ILogedUser>  = computed(() => this._AuthenticationService.userInfo() );
   constructor(){
@@ -77,6 +79,10 @@ export class HomeComponent implements AfterViewInit{
 
 
 
+  forHoldingPostId(posiId:string){
+    this.holdPostId = posiId
+  }
+
   LikePost(postID:string){
 
     this._PostsService.LikesOnPost(postID).subscribe({
@@ -101,6 +107,37 @@ export class HomeComponent implements AfterViewInit{
     })
   }
 
+  leaveComment(){
+    let commentFormData = new FormData();
+    this.ImgSrc ? commentFormData.append('image' , this.ImgSrc) : this.ImgSrc = {} as File
+    console.log(this.ImgSrc); 
+    commentFormData.append('content' , this.commentConent)
+    
+    for( let [img,content] of commentFormData.entries() ){
+      console.log(img , content);
+    }
+    this._CommentsAndRepliesService.CreateComment(this.holdPostId,commentFormData).subscribe({
+      next:(res)=>{
+        console.log(res);
+        this.commentConent = ''
+        console.log(this.holdPostId);
+        
+        this.CommentsOfPost(this.holdPostId)
+        this.getAllPosts()
+      },
+      error:(err)=>{
+        console.log(err);
+
+      }
+    })
+  }
+
+  SharePost(){
+    
+  }
+
+
+  // post details
   PostLikes(postId:string,flag?:boolean){
     flag ? null : this.postLikes = [] 
 
@@ -111,12 +148,6 @@ export class HomeComponent implements AfterViewInit{
       }
     })
   }
-
-  SharePost(){
-    
-  }
-
-  // post details
   CommentsOfPost(postID:string,flag?:boolean){
     flag ? null :this.postComments = [] 
     this._CommentsAndRepliesService.GetPostComments(postID).subscribe({
@@ -126,16 +157,6 @@ export class HomeComponent implements AfterViewInit{
       },error:(err)=>{
         console.log(err);
         
-      }
-    })
-  }
-  repliesOfComment(postId:string , commentID:string,flag?:boolean){
-    flag ? null :this.commentReplies = [] 
-    this._CommentsAndRepliesService.GetCommentReplies(postId , commentID).subscribe({
-      next:(res)=>{
-        this.commentReplies = res.data.replies
-        console.log(this.commentReplies);
-                
       }
     })
   }
@@ -150,18 +171,30 @@ export class HomeComponent implements AfterViewInit{
       }
     })
   }
+
+
   // Replies
+  repliesOfComment(postId:string , commentID:string,flag?:boolean){
+    flag ? null :this.commentReplies = [] 
+    this._CommentsAndRepliesService.GetCommentReplies(postId , commentID).subscribe({
+      next:(res)=>{
+        this.commentReplies = res.data.replies
+        console.log(this.commentReplies);
+                
+      }
+    })
+  }
   holdReplyImag(e:Event){
     console.log(e.target);
     let inputFile = (e.target) as HTMLInputElement
     if(inputFile.files && inputFile.files.length > 0){
-      this.replyImgSrc = inputFile.files[0];
+      this.ImgSrc = inputFile.files[0];
     }
   }
   replayOnComment(commentID:string,postID:string){
     let replyFormData = new FormData()
-    this.replyImgSrc ? replyFormData.append('image' , this.replyImgSrc) : this.replyImgSrc = {} as File
-    console.log(this.replyImgSrc);
+    this.ImgSrc ? replyFormData.append('image' , this.ImgSrc) : this.ImgSrc = {} as File
+    console.log(this.ImgSrc);
     
     replyFormData.append('content' , this.replyConent)
     for( let [img,content] of replyFormData.entries() ){
@@ -169,6 +202,7 @@ export class HomeComponent implements AfterViewInit{
     }
     this._CommentsAndRepliesService.ReplyOnComment(replyFormData , postID , commentID).subscribe({
       next:(res)=>{
+        this.replyConent = ''
         console.log(res);
       }
     })

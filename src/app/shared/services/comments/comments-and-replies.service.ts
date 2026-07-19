@@ -13,7 +13,9 @@ export class CommentsAndRepliesService {
   GetPostComments(postID:string):Observable<any>{
     return this._HttpClient.get(`${environment.baseURL}/posts/${postID}/comments?page=1&limit=10`)
   }
-
+  CreateComment(postId:string,formData:object):Observable<any>{
+    return this._HttpClient.post(`${environment.baseURL}/posts/${postId}/comments`,formData)
+  }
   GetCommentReplies(postID:string , commentID:string):Observable<any>{
     return this._HttpClient.get(`${environment.baseURL}/posts/${postID}/comments/${commentID}/replies?page=1&limit=10`)
   }
